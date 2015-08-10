@@ -30,7 +30,9 @@ if (!Yii::$app->user->isGuest) {
     $menuItems[] = [
         'label'     => 'TB mời thầu',
         'active'    => ($module == 'tbmt'),
+        'url'       => '/tbmt/default/index',
         'items' => [
+            ['label' => 'Tất cả', 'url' => ['/tbmt/default/index?view=all'], 'active' => ($category == null && $module == 'tbmt')],
             ['label' => 'Hàng hóa', 'url' => ['/tbmt/default/index?category='.MscCategory::HANG_HOA], 'active' => ($module == 'tbmt' && $category == MscCategory::HANG_HOA)],
             ['label' => 'Xây lắp', 'url' => ['/tbmt/default/index?category='.MscCategory::XAY_LAP], 'active' => ($module == 'tbmt' && $category == MscCategory::XAY_LAP)],
             ['label' => 'Tư vấn', 'url' => ['/tbmt/default/index?category='.MscCategory::TU_VAN], 'active' => ($module == 'tbmt' && $category == MscCategory::TU_VAN)],
@@ -42,6 +44,7 @@ if (!Yii::$app->user->isGuest) {
         'label' => 'TB mời thầu - QT',
         'active'    => ($module == 'tbmtqt'),
         'items' => [
+            ['label' => 'Tất cả', 'url' => ['/tbmtqt/default/index?view=all'], 'active' => ($category == null && $module == 'tbmtqt')],
             ['label' => 'Hàng hóa', 'url' => ['/tbmtqt/default/index?category='.MscCategory::HANG_HOA], 'active' => ($module == 'tbmtqt' && $category == MscCategory::HANG_HOA)],
             ['label' => 'Xây lắp', 'url' => ['/tbmtqt/default/index?category='.MscCategory::XAY_LAP], 'active' => ($module == 'tbmtqt' && $category == MscCategory::XAY_LAP)],
             ['label' => 'Tư vấn', 'url' => ['/tbmtqt/default/index?category='.MscCategory::TU_VAN], 'active' => ($module == 'tbmtqt' && $category == MscCategory::TU_VAN)],
@@ -53,6 +56,7 @@ if (!Yii::$app->user->isGuest) {
         'label' => 'KQĐT - Trực tiếp',
         'active'    => ($module == 'kqdttt'),
         'items' => [
+            ['label' => 'Tất cả', 'url' => ['/kqdttt/default/index?view=all'], 'active' => ($category == null && $module == 'kqdttt')],
             ['label' => 'Hàng hóa', 'url' => ['/kqdttt/default/index?category='.MscCategory::HANG_HOA], 'active' => ($module == 'kqdttt' && $category == MscCategory::HANG_HOA)],
             ['label' => 'Xây lắp', 'url' => ['/kqdttt/default/index?category='.MscCategory::XAY_LAP], 'active' => ($module == 'kqdttt' && $category == MscCategory::XAY_LAP)],
             ['label' => 'Tư vấn', 'url' => ['/kqdttt/default/index?category='.MscCategory::TU_VAN], 'active' => ($module == 'kqdttt' && $category == MscCategory::TU_VAN)],

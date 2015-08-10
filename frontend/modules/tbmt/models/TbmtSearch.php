@@ -55,6 +55,25 @@ class TbmtSearch extends Tbmt
             return $dataProvider;
         }
 
+        //category
+        if (!$this->category && isset($params['category'])) {
+            $this->category = $params['category'];
+        }
+
+        //date range && date type
+        if (isset($params['date-range']) && $params['date-range'] !== '' && isset($params['date-type']) && $params['date-type'] !== '') {
+            $t = explode('-', $params['date-range']);
+            if (!empty($t)) {
+                $start = strtotime(trim($t[0]) . ' 00:00');
+                $end = strtotime(trim($t[1]) . ' 23:59');
+
+                $type = trim($params['date-type']);
+
+                $query->andFilterWhere(['>=', $type, $start]);
+                $query->andFilterWhere(['<=', $type, $end]);
+            }
+        }
+
         $query->andFilterWhere([
             'id' => $this->id,
             'category' => $this->category,

@@ -6,7 +6,8 @@ use Yii;
 use frontend\modules\tbmt\models\Tbmt;
 use frontend\modules\tbmt\models\TbmtSearch;
 use common\controllers\FrontendController;
-use yii\web\Controller;
+use arturoliveira\ExcelView;
+use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -15,6 +16,8 @@ use yii\filters\VerbFilter;
  */
 class DefaultController extends FrontendController
 {
+    public $layout = '//main';
+
     public function behaviors()
     {
         return [
@@ -118,5 +121,76 @@ class DefaultController extends FrontendController
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    /**
+     * Export data to Excel file
+     */
+    public function actionExport()
+    {
+        $builder = $this->buildQuery(true);
+        $query = $builder['query'];
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+        ExcelView::widget([
+            'dataProvider' => $dataProvider,
+            'fullExportType' => 'xlsx',
+
+            'grid_mode' => 'export',
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
+                [
+                    'attribute' => 'station_name',
+                    'header' => 'Tên trạm',
+                ],
+                [
+                    'attribute' => 'message',
+                    'header' => 'Nội dung',
+                ],
+                [
+                    'attribute' => 'warning_date',
+                    'header' => 'Thời gian',
+                ],
+            ],
+        ]);
+    }
+
+    private function buildQuery()
+    {
+        $parseData = [];
+        $query = new Query();
+        $query->select(['warning.message AS message', 'station.name AS station_name', 'DATE_FORMAT(FROM_UNIXTIME(warning.warning_time), "%d/%m/%Y %H:%i:%s") AS warning_date'])
+            ->from('warning')
+            ->leftJoin('station', 'station.id = warning.station_id')
+            ->where([]);
+
+        // filter by center
+        $center = Yii::$app->request->get('center');
+        if ($center > 0) {
+            $query->andWhere(['station.center_id' => $center]);
+        }
+
+        // filter by time points
+        $getBy = Yii::$app->request->get('get_by');
+        if ($getBy) {
+            if ($getBy == 'today') {
+                $timePoints = Convert::currentTimePoints();
+            } else if ($getBy == 'week') {
+                $timePoints = Convert::currentWeekTimePoints();
+            } else if ($getBy == 'month') {
+                $timePoints = Convert::currentMonthTimePoints();
+            }
+            $query->andWhere(['>=', 'warning.warning_time', $timePoints['start']]);
+            $query->andWhere(['<=', 'warning.warning_time', $timePoints['end']]);
+        }
+
+        $query->orderBy('warning_time DESC');
+
+        return [
+            'query' => $query,
+            'parseData' => $parseData,
+        ];
     }
 }

@@ -21,18 +21,8 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
     <?php $this->registerCssFile(Yii::$app->homeUrl . 'css/custom-styles.css') ?>
-    <?php $this->registerCssFile(Yii::$app->homeUrl . 'js/dialog/css/jquery.dialogbox.css') ?>
-    <?php $this->registerCssFile(Yii::$app->homeUrl . 'css/magnific-popup.css') ?>
 
     <script src="<?= Yii::$app->homeUrl . 'js/jquery-1.10.1.min.js' ?>"></script>
-    <script src="<?= Yii::$app->homeUrl . 'js/dialog/js/jquery.dialogBox.js' ?>"></script>
-    <script src="<?= Yii::$app->homeUrl . 'js/jquery.magnific-popup.js'?>"></script>
-
-    <?php if ($this->context->id == 'site' && $this->context->action->id == 'index') { ?>
-        <script src="<?= Yii::$app->homeUrl . 'js/jquery-crontab-warning.js' ?>"></script>
-    <?php } else { ?>
-        <script src="<?= Yii::$app->homeUrl . 'js/global-crontab-warning.js' ?>"></script>
-    <?php } ?>
 
 </head>
 <body>

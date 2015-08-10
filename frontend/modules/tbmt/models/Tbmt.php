@@ -74,6 +74,9 @@ class Tbmt extends \yii\db\ActiveRecord
             'han_cuoi_nhan_hs' => 'Hạn cuối nhận HS',
             'hs_moi_thau' => 'HS mời thầu',
             'temp_id' => 'Temp ID',
+            'thoi_diem_dang_tai'    => 'Thời điểm đăng tải',
+            'thoi_diem_dong_thau'   => 'Thời điểm đóng thầu',
+            'hinh_thuc_du_thau'     => 'Hình thức dự thầu',
         ];
     }
 }

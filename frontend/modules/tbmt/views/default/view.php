@@ -37,6 +37,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'gia_ban',
             'han_cuoi_nhan_hs',
             'hs_moi_thau',
+            'thoi_diem_dang_tai',
+            'thoi_diem_dong_thau',
+            'hinh_thuc_du_thau',
         ],
     ]) ?>
 
