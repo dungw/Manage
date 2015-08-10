@@ -1,0 +1,9 @@
+#testing directory
+/tests
+
+#phpstorm workspace
+/.idea
+
+#recycle directory
+/recycle
+frontend/web/js/jquery-crontab-station.js.orig

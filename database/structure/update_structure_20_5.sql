@@ -1,0 +1,1 @@
+ALTER TABLE `sensor_status` CHANGE `value` `value` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0';
