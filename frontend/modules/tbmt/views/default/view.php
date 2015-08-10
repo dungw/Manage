@@ -1,36 +1,28 @@
 <?php
-
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use common\components\helpers\Label;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\modules\tbmt\models\Tbmt */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Tbmts', 'url' => ['index']];
+$this->title = $model->so_tbmt;
+$this->params['breadcrumbs'][] = ['label' => 'Thông báo mời thầu', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tbmt-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+    <h4><?= Html::encode($this->title) ?></h4>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
             'so_tbmt',
-            'category',
+            [
+                'attribute' => 'category',
+                'value'     => Label::mscCategory($model->category),
+            ],
             'loai_tb',
             'linh_vuc',
             'hinh_thuc_tb',
@@ -45,7 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'gia_ban',
             'han_cuoi_nhan_hs',
             'hs_moi_thau',
-            'temp_id',
         ],
     ]) ?>
 

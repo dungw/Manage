@@ -28,7 +28,8 @@ if (!Yii::$app->user->isGuest) {
 
     // statistic menus
     $menuItems[] = [
-        'label' => 'TB mời thầu',
+        'label'     => 'TB mời thầu',
+        'active'    => ($module == 'tbmt'),
         'items' => [
             ['label' => 'Hàng hóa', 'url' => ['/tbmt/default/index?category='.MscCategory::HANG_HOA], 'active' => ($module == 'tbmt' && $category == MscCategory::HANG_HOA)],
             ['label' => 'Xây lắp', 'url' => ['/tbmt/default/index?category='.MscCategory::XAY_LAP], 'active' => ($module == 'tbmt' && $category == MscCategory::XAY_LAP)],
@@ -39,6 +40,7 @@ if (!Yii::$app->user->isGuest) {
     ];
     $menuItems[] = [
         'label' => 'TB mời thầu - QT',
+        'active'    => ($module == 'tbmtqt'),
         'items' => [
             ['label' => 'Hàng hóa', 'url' => ['/tbmtqt/default/index?category='.MscCategory::HANG_HOA], 'active' => ($module == 'tbmtqt' && $category == MscCategory::HANG_HOA)],
             ['label' => 'Xây lắp', 'url' => ['/tbmtqt/default/index?category='.MscCategory::XAY_LAP], 'active' => ($module == 'tbmtqt' && $category == MscCategory::XAY_LAP)],
@@ -49,6 +51,7 @@ if (!Yii::$app->user->isGuest) {
     ];
     $menuItems[] = [
         'label' => 'KQĐT - Trực tiếp',
+        'active'    => ($module == 'kqdttt'),
         'items' => [
             ['label' => 'Hàng hóa', 'url' => ['/kqdttt/default/index?category='.MscCategory::HANG_HOA], 'active' => ($module == 'kqdttt' && $category == MscCategory::HANG_HOA)],
             ['label' => 'Xây lắp', 'url' => ['/kqdttt/default/index?category='.MscCategory::XAY_LAP], 'active' => ($module == 'kqdttt' && $category == MscCategory::XAY_LAP)],
