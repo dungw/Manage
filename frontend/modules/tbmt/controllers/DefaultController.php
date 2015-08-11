@@ -128,69 +128,89 @@ class DefaultController extends FrontendController
      */
     public function actionExport()
     {
-        $builder = $this->buildQuery(true);
-        $query = $builder['query'];
+        $searchModel = new TbmtSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
         ExcelView::widget([
             'dataProvider' => $dataProvider,
             'fullExportType' => 'xlsx',
-
             'grid_mode' => 'export',
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
                 [
-                    'attribute' => 'station_name',
-                    'header' => 'Tên trạm',
+                    'attribute' => 'so_tbmt',
+                    'header' => 'Số TBMT',
                 ],
                 [
-                    'attribute' => 'message',
-                    'header' => 'Nội dung',
+                    'attribute' => 'category',
+                    'header' => 'Danh mục',
                 ],
                 [
-                    'attribute' => 'warning_date',
-                    'header' => 'Thời gian',
+                    'attribute' => 'loai_tb',
+                    'header' => 'Loại thông báo',
+                ],
+                [
+                    'attribute' => 'linh_vuc',
+                    'header' => 'Lĩnh vực',
+                ],
+                [
+                    'attribute' => 'hinh_thuc_tb',
+                    'header' => 'Hình thức thông báo',
+                ],
+                [
+                    'attribute' => 'goi_thau',
+                    'header' => 'Gói thầu',
+                ],
+                [
+                    'attribute' => 'thuoc_du_an',
+                    'header' => 'Dự án',
+                ],
+                [
+                    'attribute' => 'nguon_von',
+                    'header' => 'Nguồn vốn',
+                ],
+                [
+                    'attribute' => 'ben_mt',
+                    'header' => 'Bên mời thầu',
+                ],
+                [
+                    'attribute' => 'hinh_thuc_lua_chon',
+                    'header' => 'Hình thức lựa chọn',
+                ],
+                [
+                    'attribute' => 'tg_ban_hs_tu',
+                    'header' => 'Thời gian bán HS từ',
+                ],
+                [
+                    'attribute' => 'tg_ban_hs_den',
+                    'header' => 'Thời gian bán HS đến',
+                ],
+                [
+                    'attribute' => 'dia_diem',
+                    'header' => 'Địa điểm',
+                ],
+                [
+                    'attribute' => 'gia_ban',
+                    'header' => 'Giá bán',
+                ],
+                [
+                    'attribute' => 'han_cuoi_nhan_hs',
+                    'header' => 'Hạn cuối nhận HS',
+                ],
+                [
+                    'attribute' => 'thoi_diem_dang_tai',
+                    'header' => 'Thời điểm đăng tải',
+                ],
+                [
+                    'attribute' => 'thoi_diem_dong_thau',
+                    'header' => 'Thời điểm đóng thầu',
+                ],
+                [
+                    'attribute' => 'hinh_thuc_du_thau',
+                    'header' => 'Hình thức dự thầu',
                 ],
             ],
         ]);
     }
 
-    private function buildQuery()
-    {
-        $parseData = [];
-        $query = new Query();
-        $query->select(['warning.message AS message', 'station.name AS station_name', 'DATE_FORMAT(FROM_UNIXTIME(warning.warning_time), "%d/%m/%Y %H:%i:%s") AS warning_date'])
-            ->from('warning')
-            ->leftJoin('station', 'station.id = warning.station_id')
-            ->where([]);
-
-        // filter by center
-        $center = Yii::$app->request->get('center');
-        if ($center > 0) {
-            $query->andWhere(['station.center_id' => $center]);
-        }
-
-        // filter by time points
-        $getBy = Yii::$app->request->get('get_by');
-        if ($getBy) {
-            if ($getBy == 'today') {
-                $timePoints = Convert::currentTimePoints();
-            } else if ($getBy == 'week') {
-                $timePoints = Convert::currentWeekTimePoints();
-            } else if ($getBy == 'month') {
-                $timePoints = Convert::currentMonthTimePoints();
-            }
-            $query->andWhere(['>=', 'warning.warning_time', $timePoints['start']]);
-            $query->andWhere(['<=', 'warning.warning_time', $timePoints['end']]);
-        }
-
-        $query->orderBy('warning_time DESC');
-
-        return [
-            'query' => $query,
-            'parseData' => $parseData,
-        ];
-    }
 }

@@ -38,9 +38,9 @@ use yii\widgets\ActiveForm;
             <td width="50%">
                 <div class="form-group">
                     <label>Export</label><br>
-                    <a href="" class="btn btn-success btn-xs">Export hôm nay</a>
-                    <a href="" class="btn btn-success btn-xs">Export tuần này</a>
-                    <a href="" class="btn btn-success btn-xs">Export tháng này</a>
+                    <a target="_blank" href="/tbmt/default/export?time=today" class="btn btn-success btn-xs">Export hôm nay</a>
+                    <a target="_blank" href="/tbmt/default/export?time=this-week" class="btn btn-success btn-xs">Export tuần này</a>
+                    <a target="_blank" href="/tbmt/default/export?time=this-month" class="btn btn-success btn-xs">Export tháng này</a>
                 </div>
             </td>
         </tr>
@@ -48,7 +48,7 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary btn-xs']) ?>
-        <a href="" class="btn btn-success btn-xs">Export</a>
+        <a target="_blank" href="/tbmt/default/export?<?= $_SERVER['QUERY_STRING'] ?>" class="btn btn-success btn-xs">Export</a>
     </div>
 
     <?php ActiveForm::end(); ?>

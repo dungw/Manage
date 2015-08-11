@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use frontend\modules\tbmt\models\Tbmt;
+use common\components\helpers\Convert;
 
 /**
  * TbmtSearch represents the model behind the search form about `frontend\modules\tbmt\models\Tbmt`.
@@ -71,6 +72,17 @@ class TbmtSearch extends Tbmt
 
                 $query->andFilterWhere(['>=', $type, $start]);
                 $query->andFilterWhere(['<=', $type, $end]);
+            }
+        }
+
+        //export by time
+        if (isset($_GET['time']) && $_GET['time'] !== '') {
+            if ($_GET['time'] == 'today') {
+                $range = Convert::currentTimePoints();
+            } elseif ($_GET['time'] == 'this-week') {
+                $range = Convert::currentWeekTimePoints();
+            } elseif ($_GET['time'] == 'this-month') {
+                
             }
         }
 
