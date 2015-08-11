@@ -61,15 +61,17 @@ class TbmtSearch extends Tbmt
             $this->category = $params['category'];
         }
 
+        //add select
+        $query->addSelect(["*", "DATE_FORMAT(FROM_UNIXTIME(thoi_diem_dang_tai), "%d/%m/%Y %H:%i:%s") AS thoi_diem_dang_tai"]);
+        $query->addSelect("DATE_FORMAT(FROM_UNIXTIME(thoi_diem_dang_tai), "%d/%m/%Y %H:%i:%s") AS thoi_diem_dang_tai"]);
+
         //date range && date type
         if (isset($params['date-range']) && $params['date-range'] !== '' && isset($params['date-type']) && $params['date-type'] !== '') {
             $t = explode('-', $params['date-range']);
             if (!empty($t)) {
                 $start = strtotime(trim($t[0]) . ' 00:00');
                 $end = strtotime(trim($t[1]) . ' 23:59');
-
                 $type = trim($params['date-type']);
-
                 $query->andFilterWhere(['>=', $type, $start]);
                 $query->andFilterWhere(['<=', $type, $end]);
             }
@@ -82,7 +84,12 @@ class TbmtSearch extends Tbmt
             } elseif ($_GET['time'] == 'this-week') {
                 $range = Convert::currentWeekTimePoints();
             } elseif ($_GET['time'] == 'this-month') {
-                
+                $range = Convert::currentMonthTimePoints();
+            }
+
+            if (isset($range['start']) && isset($range['end'])) {
+                $query->andFilterWhere(['>=', 'thoi_diem_dang_tai', $range['start']]);
+                $query->andFilterWhere(['<=', 'thoi_diem_dang_tai', $range['end']]);
             }
         }
 

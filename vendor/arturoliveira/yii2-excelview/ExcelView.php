@@ -147,7 +147,7 @@ class ExcelView extends \kartik\grid\GridView {
                     'label' => Yii::t('excelview', 'Excel 2007 and above'),
                     'icon' => 'floppy-remove',
                     'worksheet' => Yii::t('excelview', 'ExportWorksheet'),
-                    'filename' => Yii::t('excelview', 'Du-lieu-canh-bao'),
+                    'filename' => Yii::t('excelview', 'grid-export'),
                     'cssFile' => '',
                     'options' => ['title' => Yii::t('excelview', 'Save as Excel (xlsx)')],
                     'Content-type' => 'application/vnd.ms-excel',

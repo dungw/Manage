@@ -8,6 +8,7 @@ use frontend\modules\tbmt\models\TbmtSearch;
 use common\controllers\FrontendController;
 use arturoliveira\ExcelView;
 use yii\data\ActiveDataProvider;
+use yii\helpers\BaseVarDumper;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
