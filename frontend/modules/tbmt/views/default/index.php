@@ -60,8 +60,9 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'thoi_diem_dong_thau',
                 'value'     => function($model) {
-                    if ($model->thoi_diem_dong_thau > 0) {}
+                    if ($model->thoi_diem_dong_thau > 0) {
                         return date('d/m/Y H:i', $model->thoi_diem_dong_thau);
+                    }
                     return null;
                 },
                 'filter'    => false,

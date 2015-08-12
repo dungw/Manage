@@ -62,8 +62,8 @@ class TbmtSearch extends Tbmt
         }
 
         //add select
-        $query->addSelect(["*", "DATE_FORMAT(FROM_UNIXTIME(thoi_diem_dang_tai), "%d/%m/%Y %H:%i:%s") AS thoi_diem_dang_tai"]);
-        $query->addSelect("DATE_FORMAT(FROM_UNIXTIME(thoi_diem_dang_tai), "%d/%m/%Y %H:%i:%s") AS thoi_diem_dang_tai"]);
+//        $query->addSelect(["*", 'DATE_FORMAT(FROM_UNIXTIME(tbmt.thoi_diem_dang_tai), "%d/%m/%Y %H:%i:%s") AS thoi_diem_dang_tai']);
+//        $query->addSelect('DATE_FORMAT(FROM_UNIXTIME(thoi_diem_dang_tai), "%d/%m/%Y %H:%i:%s") AS thoi_diem_dang_tai');
 
         //date range && date type
         if (isset($params['date-range']) && $params['date-range'] !== '' && isset($params['date-type']) && $params['date-type'] !== '') {
